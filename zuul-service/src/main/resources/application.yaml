@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: zuul-server
+zuul:
+  routes:
+    users:
+      path: /api/v1/users/**
+      serviceId: user-service
+    exercises:
+      path: /api/v1/exercises/**
+      serviceId: exercise-service
+
+
+
+logging:
+  level:
+    org:
+      springframework:
+        cloud:
+          netflix: trace
