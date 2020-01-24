@@ -25,5 +25,6 @@
 		<module>zuul-service</module>
 		<module>user-service</module>
 		<module>exercise-service</module>
+		<module>auth-service</module>
 	</modules>
 </project>
