@@ -1,7 +1,7 @@
-package com.chernyak.userservice.controller;
+package com.chernyak.exerciseservice.controller;
 
-import com.chernyak.userservice.entity.Exercise;
-import com.chernyak.userservice.service.ExerciseService;
+import com.chernyak.exerciseservice.entity.Exercise;
+import com.chernyak.exerciseservice.service.ExerciseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

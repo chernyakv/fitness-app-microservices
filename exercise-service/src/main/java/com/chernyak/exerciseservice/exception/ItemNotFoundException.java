@@ -1,4 +1,4 @@
-package com.chernyak.userservice.exception;
+package com.chernyak.exerciseservice.exception;
 
 public class ItemNotFoundException extends RuntimeException {
     public ItemNotFoundException(String msg, Throwable t) {

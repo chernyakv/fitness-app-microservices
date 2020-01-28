@@ -1,4 +1,4 @@
-package com.chernyak.userservice.entity.enums;
+package com.chernyak.exerciseservice.entity.enums;
 
 public enum GoalType {
     GAIN,

@@ -1,4 +1,4 @@
-package com.chernyak.userservice.controller;
+package com.chernyak.exerciseservice.controller;
 
 import feign.FeignException;
 import org.springframework.http.HttpStatus;

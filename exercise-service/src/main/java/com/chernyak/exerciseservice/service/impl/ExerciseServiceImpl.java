@@ -1,13 +1,13 @@
-package com.chernyak.userservice.service.impl;
+package com.chernyak.exerciseservice.service.impl;
 
-import com.chernyak.userservice.client.UserServiceFeignClient;
-import com.chernyak.userservice.entity.Exercise;
-import com.chernyak.userservice.entity.GoalConfig;
-import com.chernyak.userservice.entity.User;
-import com.chernyak.userservice.entity.enums.GoalType;
-import com.chernyak.userservice.repository.ExerciseRepository;
-import com.chernyak.userservice.service.ExerciseService;
-import com.chernyak.userservice.service.GoalConfigService;
+import com.chernyak.exerciseservice.client.UserServiceFeignClient;
+import com.chernyak.exerciseservice.entity.Exercise;
+import com.chernyak.exerciseservice.entity.GoalConfig;
+import com.chernyak.exerciseservice.entity.User;
+import com.chernyak.exerciseservice.entity.enums.GoalType;
+import com.chernyak.exerciseservice.repository.ExerciseRepository;
+import com.chernyak.exerciseservice.service.ExerciseService;
+import com.chernyak.exerciseservice.service.GoalConfigService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

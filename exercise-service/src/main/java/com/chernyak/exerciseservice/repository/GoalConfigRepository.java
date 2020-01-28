@@ -1,7 +1,7 @@
-package com.chernyak.userservice.repository;
+package com.chernyak.exerciseservice.repository;
 
-import com.chernyak.userservice.entity.GoalConfig;
-import com.chernyak.userservice.entity.enums.GoalType;
+import com.chernyak.exerciseservice.entity.GoalConfig;
+import com.chernyak.exerciseservice.entity.enums.GoalType;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Component;
 

@@ -1,4 +1,4 @@
-package com.chernyak.userservice.entity;
+package com.chernyak.exerciseservice.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;

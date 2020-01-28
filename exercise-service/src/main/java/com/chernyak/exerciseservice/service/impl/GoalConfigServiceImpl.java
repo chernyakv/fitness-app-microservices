@@ -1,10 +1,10 @@
-package com.chernyak.userservice.service.impl;
+package com.chernyak.exerciseservice.service.impl;
 
-import com.chernyak.userservice.entity.GoalConfig;
-import com.chernyak.userservice.entity.enums.GoalType;
-import com.chernyak.userservice.exception.ItemNotFoundException;
-import com.chernyak.userservice.repository.GoalConfigRepository;
-import com.chernyak.userservice.service.GoalConfigService;
+import com.chernyak.exerciseservice.entity.GoalConfig;
+import com.chernyak.exerciseservice.entity.enums.GoalType;
+import com.chernyak.exerciseservice.exception.ItemNotFoundException;
+import com.chernyak.exerciseservice.repository.GoalConfigRepository;
+import com.chernyak.exerciseservice.service.GoalConfigService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

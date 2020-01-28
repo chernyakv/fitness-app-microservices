@@ -1,6 +1,6 @@
-package com.chernyak.userservice.entity;
+package com.chernyak.exerciseservice.entity;
 
-import com.chernyak.userservice.entity.enums.GoalType;
+import com.chernyak.exerciseservice.entity.enums.GoalType;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;

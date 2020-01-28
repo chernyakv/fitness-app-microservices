@@ -1,4 +1,4 @@
-package com.chernyak.userservice.entity;
+package com.chernyak.exerciseservice.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;

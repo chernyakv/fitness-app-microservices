@@ -1,4 +1,4 @@
-package com.chernyak.zuulservice.configuration;
+package com.chernyak.zuulservice.config;
 
 import com.chernyak.zuulservice.security.jwt.JwtAuthenticationEntryPoint;
 import com.chernyak.zuulservice.security.jwt.JwtAuthenticationFilter;
@@ -31,7 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/configuration/ui",
             "/configuration/security",
             "/swagger-ui.html",
-            "/webjars/**"
+            "/webjars/**",
+            "/**"
     };
 
     @Resource(name = "customUserDetailsService")

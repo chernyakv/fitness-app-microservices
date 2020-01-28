@@ -1,6 +1,6 @@
-package com.chernyak.userservice.service;
+package com.chernyak.exerciseservice.service;
 
-import com.chernyak.userservice.entity.Exercise;
+import com.chernyak.exerciseservice.entity.Exercise;
 
 import java.time.LocalDate;
 import java.util.List;

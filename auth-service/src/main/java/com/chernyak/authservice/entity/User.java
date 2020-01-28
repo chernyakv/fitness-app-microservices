@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class User {
+    public static final String DEFAULT_USER_LOGIN = "default";
+    public static final String DEFAULT_USER_PASSWORD = "123456";
 
     private String id;
 

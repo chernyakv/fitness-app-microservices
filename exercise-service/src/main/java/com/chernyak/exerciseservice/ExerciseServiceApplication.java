@@ -1,4 +1,4 @@
-package com.chernyak.userservice;
+package com.chernyak.exerciseservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

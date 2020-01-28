@@ -1,6 +1,6 @@
-package com.chernyak.userservice.client;
+package com.chernyak.exerciseservice.client;
 
-import com.chernyak.userservice.entity.User;
+import com.chernyak.exerciseservice.entity.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

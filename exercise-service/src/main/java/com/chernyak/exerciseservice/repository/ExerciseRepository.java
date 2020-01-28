@@ -1,6 +1,6 @@
-package com.chernyak.userservice.repository;
+package com.chernyak.exerciseservice.repository;
 
-import com.chernyak.userservice.entity.Exercise;
+import com.chernyak.exerciseservice.entity.Exercise;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.time.LocalDate;

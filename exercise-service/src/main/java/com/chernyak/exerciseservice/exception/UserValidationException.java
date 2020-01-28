@@ -1,4 +1,4 @@
-package com.chernyak.userservice.exception;
+package com.chernyak.exerciseservice.exception;
 
 public class UserValidationException extends RuntimeException {
     public UserValidationException(String msg, Throwable t) {
