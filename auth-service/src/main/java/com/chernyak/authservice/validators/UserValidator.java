@@ -1,6 +1,6 @@
 package com.chernyak.authservice.validators;
 
-import com.chernyak.authservice.dto.RegisterRequestModel;
+import com.chernyak.authservice.dto.RegisterRequestDTO;
 import com.chernyak.authservice.entity.User;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
@@ -11,7 +11,7 @@ public class UserValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return RegisterRequestModel.class.equals(aClass);
+        return RegisterRequestDTO.class.equals(aClass);
     }
 
     public void validate(Object o, Errors errors) {

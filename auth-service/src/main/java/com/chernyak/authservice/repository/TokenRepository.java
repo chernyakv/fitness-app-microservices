@@ -7,5 +7,4 @@ import java.util.Optional;
 
 public interface TokenRepository extends MongoRepository<JwtToken, String> {
     Optional<JwtToken> findByAccessToken(String accessToken);
-
 }

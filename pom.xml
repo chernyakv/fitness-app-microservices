@@ -23,6 +23,7 @@
 	<modules>
 		<module>eureka-server</module>
 		<module>zuul-service</module>
+		<module>config-server</module>
 		<module>user-service</module>
 		<module>exercise-service</module>
 		<module>auth-service</module>

@@ -1,6 +1,6 @@
 package com.chernyak.authservice.validators;
 
-import com.chernyak.authservice.dto.RegisterRequestModel;
+import com.chernyak.authservice.dto.RegisterRequestDTO;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -13,14 +13,14 @@ public class RegistrationUserValidator implements Validator {
 
     @Override
     public boolean supports(Class<?> aClass) {
-        return RegisterRequestModel.class.equals(aClass);
+        return RegisterRequestDTO.class.equals(aClass);
     }
 
     public void validate(Object o, Errors errors) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "login", "field required");
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "field required");
 
-        RegisterRequestModel registrationModel = (RegisterRequestModel) o;
+        RegisterRequestDTO registrationModel = (RegisterRequestDTO) o;
 
         if (registrationModel.getPassword() != null && registrationModel.getPassword().trim().length() < MINIMUM_PASSWORD_LENGTH) {
             errors.rejectValue("password", "field.min.length",

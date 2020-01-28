@@ -1,8 +1,8 @@
 package com.chernyak.authservice.service.impl;
 
 import com.chernyak.authservice.client.UserServiceFeignClient;
-import com.chernyak.authservice.dto.LoginRequestModel;
-import com.chernyak.authservice.dto.RegisterRequestModel;
+import com.chernyak.authservice.dto.LoginRequestDTO;
+import com.chernyak.authservice.dto.RegisterRequestDTO;
 import com.chernyak.authservice.entity.JwtToken;
 import com.chernyak.authservice.entity.User;
 import com.chernyak.authservice.security.JwtTokenProvider;
@@ -30,7 +30,7 @@ public class AuthenticationServiceImpl implements AuthenticationSerivce {
     }
 
     @Override
-    public User registration(RegisterRequestModel registerRequestModel) {
+    public User registration(RegisterRequestDTO registerRequestModel) {
         User newUser = new User();
         User defaultUser = userServiceFeignClient.getByLogin(User.DEFAULT_USER_LOGIN);
         newUser.setLogin(registerRequestModel.getLogin());
@@ -39,7 +39,7 @@ public class AuthenticationServiceImpl implements AuthenticationSerivce {
     }
 
     @Override
-    public JwtToken login(LoginRequestModel loginRequest) throws ExpiredJwtException {
+    public JwtToken login(LoginRequestDTO loginRequest) throws ExpiredJwtException {
         User user = userServiceFeignClient.getByLogin(loginRequest.getLogin());
         final String token = tokenProvider.generateToken(user);
         final String refreshToken = tokenProvider.generateRefreshToken(user);

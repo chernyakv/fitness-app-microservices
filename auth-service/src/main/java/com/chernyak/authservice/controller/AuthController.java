@@ -1,7 +1,7 @@
 package com.chernyak.authservice.controller;
 
-import com.chernyak.authservice.dto.LoginRequestModel;
-import com.chernyak.authservice.dto.RegisterRequestModel;
+import com.chernyak.authservice.dto.LoginRequestDTO;
+import com.chernyak.authservice.dto.RegisterRequestDTO;
 import com.chernyak.authservice.entity.JwtToken;
 import com.chernyak.authservice.entity.User;
 import com.chernyak.authservice.exception.UserValidationException;
@@ -36,13 +36,8 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @GetMapping(value="/test")
-    public ResponseEntity<String> test() {
-        return ResponseEntity.ok("test");
-    }
-
     @PostMapping(value="/register")
-    public ResponseEntity<User> signUp(@RequestBody RegisterRequestModel registerRequestModel, BindingResult bindingResult) {
+    public ResponseEntity<User> signUp(@RequestBody RegisterRequestDTO registerRequestModel, BindingResult bindingResult) {
         regUserValidator.validate(registerRequestModel, bindingResult);
         if(bindingResult.hasErrors()){
             throw new UserValidationException(RestExceptionHandler.createExceptionMessage(bindingResult.getAllErrors()));
@@ -51,7 +46,7 @@ public class AuthController {
     }
 
     @PostMapping(value = "/login")
-    public ResponseEntity<JwtToken> signIn(@RequestBody LoginRequestModel lRequest, BindingResult bindingResult) {
+    public ResponseEntity<JwtToken> signIn(@RequestBody LoginRequestDTO lRequest, BindingResult bindingResult) {
         loginUserValidator.validate(lRequest, bindingResult);
         if(bindingResult.hasErrors()) {
             throw new UserValidationException(RestExceptionHandler.createExceptionMessage(bindingResult.getAllErrors()));

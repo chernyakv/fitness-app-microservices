@@ -16,14 +16,18 @@ import java.util.function.Function;
 @Component
 public class JwtTokenProvider implements Serializable {
 
-    @Autowired
     TokenStoreImpl tokenStore;
+
+    @Autowired
+    public JwtTokenProvider(TokenStoreImpl tokenStore) {
+        this.tokenStore = tokenStore;
+    }
 
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
 
-    public Date getExpirationDateFromToken(String token){
+    public Date getExpirationDateFromToken(String token) {
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
@@ -44,9 +48,11 @@ public class JwtTokenProvider implements Serializable {
     }
 
     public String generateToken(User user) {
+        String authorities = "ROLE_" + user.getRole().getRole();
 
         return Jwts.builder()
                 .setSubject(user.getLogin())
+                .claim(SecurityJwtConstants.AUTHORITIES_KEY, authorities)
                 .signWith(SignatureAlgorithm.HS256, SecurityJwtConstants.SIGNING_KEY)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + SecurityJwtConstants.ACCESS_TOKEN_VALIDITY_SECONDS * 1000))
@@ -54,7 +60,7 @@ public class JwtTokenProvider implements Serializable {
     }
 
     public String generateRefreshToken(User user) {
-        return  Jwts.builder()
+        return Jwts.builder()
                 .setSubject(user.getLogin())
                 .signWith(SignatureAlgorithm.HS256, SecurityJwtConstants.SIGNING_KEY)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
@@ -65,8 +71,7 @@ public class JwtTokenProvider implements Serializable {
     public boolean validateToken(String token, User userDetails) {
         tokenStore.checkToken(token);
         final String userName = getUsernameFromToken(token);
-        boolean test = userName.equals(userDetails.getLogin()) && !isTokenExpired(token);
-        return test;
+        return userName.equals(userDetails.getLogin()) && !isTokenExpired(token);
     }
 
 }
