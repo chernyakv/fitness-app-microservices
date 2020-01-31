@@ -1,5 +1,6 @@
 package com.chernyak.userservice.service;
 
+import com.chernyak.userservice.entity.Goal;
 import com.chernyak.userservice.entity.User;
 import com.chernyak.userservice.entity.UserParameters;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +14,7 @@ public interface UserService {
     User findById(String id);
     List<User> getAll();
     List<UserParameters> getUserParametersHistory(String id, LocalDate from, LocalDate to);
+    User setUserGoal(String id, Goal goal);
     User save(User user);
     User update(String id, User pUser);
     User updateUserParameters(String id, UserParameters userParameters);

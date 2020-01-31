@@ -20,12 +20,12 @@ public class ExerciseController {
     }
 
     @GetMapping(value = "/today")
-    public ResponseEntity<Exercise> getExerciseOnDate(@RequestParam String goalId) {
-        return new ResponseEntity<Exercise>(exerciseService.getExerciseForToday(goalId), HttpStatus.OK);
+    public ResponseEntity<Exercise> getExerciseOnDate(@RequestParam String userId) {
+        return new ResponseEntity<>(exerciseService.getExerciseForToday(userId), HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Exercise> getExerciseOnDate(@PathVariable String id, @RequestBody Exercise exercise) {
-        return new ResponseEntity<Exercise>(exerciseService.update(id, exercise), HttpStatus.OK);
+        return new ResponseEntity<>(exerciseService.update(id, exercise), HttpStatus.OK);
     }
 }

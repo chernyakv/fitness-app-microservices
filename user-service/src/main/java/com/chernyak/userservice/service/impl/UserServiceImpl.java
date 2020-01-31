@@ -1,8 +1,10 @@
 package com.chernyak.userservice.service.impl;
 
+import com.chernyak.userservice.entity.Goal;
+import com.chernyak.userservice.entity.Role;
 import com.chernyak.userservice.entity.User;
 import com.chernyak.userservice.entity.UserParameters;
-import com.chernyak.userservice.exception.ItemNotFoundException;
+import com.chernyak.userservice.exception.EntityNotFoundException;
 import com.chernyak.userservice.repository.RoleRepository;
 import com.chernyak.userservice.repository.UserParameterRepository;
 import com.chernyak.userservice.repository.UserRepository;
@@ -47,20 +49,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(String id) {
         return userRepository.findById(id)
-                .orElseThrow(() -> new ItemNotFoundException("No user found with id - " + id));
+                .orElseThrow(() -> new EntityNotFoundException(User.class, "id", id));
     }
 
     @Override
     public User findByLogin(String login) {
         return userRepository.findByLogin(login)
-                .orElseThrow(() -> new ItemNotFoundException("No user found with login - " + login));
+                .orElseThrow(() -> new EntityNotFoundException(User.class, "login", login));
     }
 
     @Override
     public List<User> getAll() {
         List<User> users = userRepository.findAll();
         if (users.size() <= 0) {
-            throw new ItemNotFoundException("No users found");
+            throw new EntityNotFoundException(User.class, "all", "");
         }
         return users;
     }
@@ -74,17 +76,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User updateUserParameters(String id, UserParameters userParameters) {
-        User user = findById(id);
-        user.setHeight(userParameters.getHeight());
-        user.setWeight(userParameters.getWeight());
-        userParameterRepository.save(userParameters);
-        return userRepository.save(user);
-    }
-
-    @Override
     public User save(User pUser) {
-        pUser.setRole(roleRepository.findByRole("USER").get());
+        Role role = roleRepository.findByRole("USER").orElseThrow(() -> new EntityNotFoundException(Role.class, "role", "USER"));
+        pUser.setRole(role);
         String password = pUser.getPassword() != null ? pUser.getPassword() : User.DEFAULT_USER_PASSWORD;
         pUser.setPassword(bCryptPasswordEncoder.encode(password));
         User createdUser = userRepository.save(pUser);
@@ -95,7 +89,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(String id) {
         User user = userRepository.findById(id)
-                .orElseThrow(() -> new ItemNotFoundException("No user found with id - " + id));
+                .orElseThrow(() -> new EntityNotFoundException(User.class, "id", id));
         userRepository.delete(user);
     }
 
@@ -118,5 +112,21 @@ public class UserServiceImpl implements UserService {
     public List<UserParameters> getUserParametersHistory(String id, LocalDate from, LocalDate to) {
         Sort sort = Sort.by("date");
         return userParameterRepository.getUserParametersForPeriod(id, from, to, sort);
+    }
+
+    @Override
+    public User updateUserParameters(String id, UserParameters userParameters) {
+        User user = findById(id);
+        user.setHeight(userParameters.getHeight());
+        user.setWeight(userParameters.getWeight());
+        userParameterRepository.save(userParameters);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User setUserGoal(String id, Goal goal) {
+        User user = findById(id);
+        user.setGoal(goal);
+        return userRepository.save(user);
     }
 }

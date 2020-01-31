@@ -18,8 +18,8 @@ public class TokenStoreImpl implements TokenStore {
     }
 
     @Override
-    public void storeToken(JwtToken token) {
-        tokenRepository.save(token);
+    public JwtToken storeToken(JwtToken token) {
+        return tokenRepository.save(token);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.chernyak.userservice.controller;
 
+import com.chernyak.userservice.entity.Goal;
 import com.chernyak.userservice.entity.User;
 import com.chernyak.userservice.entity.UserParameters;
 import com.chernyak.userservice.service.UserService;
@@ -27,12 +28,12 @@ public class UserController {
 
     @GetMapping(value = "")
     public ResponseEntity<List<User>> getAll() {
-        return new ResponseEntity<List<User>>(userService.getAll(), HttpStatus.OK);
+        return new ResponseEntity<>(userService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<User> getById(@PathVariable String id) {
-        return new ResponseEntity<User>(userService.findById(id), HttpStatus.OK);
+        return new ResponseEntity<>(userService.findById(id), HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}/parameters")
@@ -44,22 +45,22 @@ public class UserController {
 
     @GetMapping(value = "/login/{login}")
     public ResponseEntity<User> getByLogin(@PathVariable String login) {
-        return new ResponseEntity<User>(userService.findByLogin(login), HttpStatus.OK);
+        return new ResponseEntity<>(userService.findByLogin(login), HttpStatus.OK);
     }
 
     @PostMapping(value = "")
     public ResponseEntity<User> save(@RequestBody User user) {
-        return new ResponseEntity<User>(userService.save(user), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.save(user), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<User> update(@PathVariable String id, @RequestBody User user) {
-        return new ResponseEntity<User>(userService.update(id, user), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.update(id, user), HttpStatus.CREATED);
     }
 
     @PutMapping(value = "/{id}/parameters")
     public ResponseEntity<User> updateUserParameters(@PathVariable String id, @RequestBody UserParameters userParameters) {
-        return new ResponseEntity<User>(userService.updateUserParameters(id, userParameters), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.updateUserParameters(id, userParameters), HttpStatus.CREATED);
     }
 
     @DeleteMapping(value = "/{id}")
@@ -69,9 +70,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/{id}/goal")
-    public ResponseEntity<User> setUserGoal(@PathVariable String id) {
-        User user = userService.findById(id);
-        user.setHasGoal(true);
-        return new ResponseEntity<User>(userService.update(id, user), HttpStatus.OK);
+    public ResponseEntity<User> setUserGoal(@PathVariable String id, @RequestBody Goal goal) {
+        return new ResponseEntity<>(userService.setUserGoal(id, goal), HttpStatus.OK);
     }
 }

@@ -1,12 +1,18 @@
 package com.chernyak.userservice.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
+@Builder
 @Document(collection = "user")
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     public static final String DEFAULT_USER_LOGIN = "default";
     public static final String DEFAULT_USER_PASSWORD = "123456";
@@ -16,7 +22,6 @@ public class User {
 
     private String login;
 
-    //@JsonIgnore
     private String password;
 
     private String firstName;
@@ -31,13 +36,10 @@ public class User {
 
     private String avatar;
 
-    private boolean hasGoal;
+    private Goal goal;
 
     @DBRef
     private Role role;
-
-    public User() {
-    }
 
     public User(String login, String password) {
         this.login = login;

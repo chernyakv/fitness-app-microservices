@@ -23,7 +23,9 @@ public class ExerciseServiceImpl implements ExerciseService {
     GoalConfigService goalConfigService;
 
     @Autowired
-    public ExerciseServiceImpl(UserServiceFeignClient userServiceFeignClient, ExerciseRepository exerciseRepository, GoalConfigServiceImpl goalConfigService) {
+    public ExerciseServiceImpl(UserServiceFeignClient userServiceFeignClient,
+                               ExerciseRepository exerciseRepository,
+                               GoalConfigServiceImpl goalConfigService) {
         this.userServiceFeignClient = userServiceFeignClient;
         this.goalConfigService = goalConfigService;
         this.exerciseRepository = exerciseRepository;
@@ -37,7 +39,7 @@ public class ExerciseServiceImpl implements ExerciseService {
     @Override
     public Exercise getExerciseForToday(String userId) {
         User user = userServiceFeignClient.getUser(userId);
-        GoalConfig goalConfig = goalConfigService.get(GoalType.LOSE);
+        GoalConfig goalConfig = goalConfigService.get(GoalType.HOLD );
         LocalDate date = LocalDate.now();
         List<Exercise> exercise = getByUserIdAndDate(userId, date);
         if (exercise == null || exercise.size() <= 0) {

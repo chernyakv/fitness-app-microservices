@@ -26,7 +26,7 @@ public class User {
 
     private String avatar;
 
-    private boolean hasGoal;
+    private Goal goal;
 
     public User() {
     }
