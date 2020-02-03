@@ -35,7 +35,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public User registration(RegisterRequest registerRequestModel) {
         User newUser = new User();
-        newUser.setLogin(registerRequestModel.getLogin());
+        newUser.setUsername(registerRequestModel.getLogin());
         newUser.setPassword(registerRequestModel.getPassword());
         return userServiceFeignClient.save(newUser);
     }

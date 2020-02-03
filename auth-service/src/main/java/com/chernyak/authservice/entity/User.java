@@ -4,39 +4,59 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User implements UserDetails    {
     public static final String DEFAULT_USER_LOGIN = "default";
     public static final String DEFAULT_USER_PASSWORD = "123456";
 
     private String id;
 
-    private String login;
+    private String username;
 
     private String password;
 
-    private String firstName;
+    private boolean activated;
 
-    private String lastName;
+    private Set<Role> authorities = new HashSet<>();
 
-    private int age;
+    @Override
+    public ArrayList<Role> getAuthorities() {
+        return new ArrayList<>(authorities);
+    }
 
-    private int height;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
 
-    private int weight;
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
 
-    private String avatar;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
 
-    private boolean hasGoal;
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
 
-    private Role role;
-
-    public User(String login, String password) {
-        this.login = login;
+    public User(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 }

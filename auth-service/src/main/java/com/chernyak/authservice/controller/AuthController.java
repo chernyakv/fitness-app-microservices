@@ -6,9 +6,7 @@ import com.chernyak.authservice.entity.JwtToken;
 import com.chernyak.authservice.entity.User;
 import com.chernyak.authservice.exception.UserValidationException;
 import com.chernyak.authservice.service.AuthenticationService;
-import com.chernyak.authservice.service.TokenStore;
 import com.chernyak.authservice.service.impl.AuthenticationServiceImpl;
-import com.chernyak.authservice.service.impl.TokenStoreImpl;
 import com.chernyak.authservice.validators.LoginUserValidator;
 import com.chernyak.authservice.validators.RegistrationUserValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,10 +34,10 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping(value="/register")
+    @PostMapping(value = "/register")
     public ResponseEntity<User> signUp(@RequestBody RegisterRequest rRequest, BindingResult bindingResult) {
         regUserValidator.validate(rRequest, bindingResult);
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             throw new UserValidationException(RestExceptionHandler.createExceptionMessage(bindingResult.getAllErrors()));
         }
         return ResponseEntity.ok(authService.registration(rRequest));
@@ -48,8 +46,7 @@ public class AuthController {
     @PostMapping(value = "/login")
     public ResponseEntity<JwtToken> signIn(@RequestBody LoginRequest lRequest, BindingResult bindingResult) {
         loginUserValidator.validate(lRequest, bindingResult);
-        if(bindingResult.hasErrors()) {
-            List<FieldError> errors = bindingResult.getFieldErrors();
+        if (bindingResult.hasErrors()) {
             throw new UserValidationException(RestExceptionHandler.createExceptionMessage(bindingResult.getAllErrors()));
         }
         return ResponseEntity.ok(authService.login(lRequest));

@@ -48,10 +48,10 @@ public class JwtTokenProvider implements Serializable {
     }
 
     public String generateToken(User user) {
-        String authorities = "ROLE_" + user.getRole().getRole();
+        String authorities = "ROLE_" + user.getAuthorities().get(0);
 
         return Jwts.builder()
-                .setSubject(user.getLogin())
+                .setSubject(user.getUsername())
                 .claim(SecurityJwtConstants.AUTHORITIES_KEY, authorities)
                 .signWith(SignatureAlgorithm.HS256, SecurityJwtConstants.SIGNING_KEY)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
@@ -61,7 +61,7 @@ public class JwtTokenProvider implements Serializable {
 
     public String generateRefreshToken(User user) {
         return Jwts.builder()
-                .setSubject(user.getLogin())
+                .setSubject(user.getUsername())
                 .signWith(SignatureAlgorithm.HS256, SecurityJwtConstants.SIGNING_KEY)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + SecurityJwtConstants.REFRESH_TOKEN_VALIDITY_SECONDS * 1000))
@@ -71,7 +71,7 @@ public class JwtTokenProvider implements Serializable {
     public boolean validateToken(String token, User userDetails) {
         tokenStore.checkToken(token);
         final String userName = getUsernameFromToken(token);
-        return userName.equals(userDetails.getLogin()) && !isTokenExpired(token);
+        return userName.equals(userDetails.getUsername()) && !isTokenExpired(token);
     }
 
 }
