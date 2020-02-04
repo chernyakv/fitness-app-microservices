@@ -34,7 +34,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String header = httpServletRequest.getHeader(JwtConstants.HEADER_STRING);
         String userName = null;
         String authToken = null;
-        if (header != null && header.startsWith(JwtConstants.TOKEN_PREFIX)) {
+        /*if (header != null && header.startsWith(JwtConstants.TOKEN_PREFIX)) {
             authToken = header.replace(JwtConstants.TOKEN_PREFIX + " ", "");
             try {
                 userName = tokenProvider.getUsernameFromToken(authToken);
@@ -58,7 +58,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 logger.info("Authenticated user " + userName + ", setting security context.");
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
-        }
+        }*/
 
         filterChain.doFilter(httpServletRequest, httpServletResponse);
     }

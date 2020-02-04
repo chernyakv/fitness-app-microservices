@@ -11,8 +11,8 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 @DependsOn("mongoTemplate")
 public class MongoBeeConfig {
 
-    private static final String MONGODB_URL_FORMAT = "mongodb://%s:%s@%s:%d/%s";
-    private static final String MONGODB_CHANGELOGS_PACKAGE = "com.marcusdacoregio.authservice.config.mongodb.changelogs";
+    private static final String MONGODB_URL_FORMAT = "mongodb://%s:%d/%s";
+    private static final String MONGODB_CHANGELOGS_PACKAGE = "com.chernyak.authservice.config.mongodb.changelogs";
 
     @Autowired
     private MongoProperties mongoProperties;
@@ -23,8 +23,6 @@ public class MongoBeeConfig {
     @Bean
     public Mongobee mongobee() {
         Mongobee runner = new Mongobee(String.format(MONGODB_URL_FORMAT,
-                mongoProperties.getUsername(),
-                mongoProperties.getPassword(),
                 mongoProperties.getHost(),
                 mongoProperties.getPort(),
                 mongoProperties.getDatabase()));

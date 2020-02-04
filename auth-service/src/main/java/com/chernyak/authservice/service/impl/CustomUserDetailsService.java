@@ -1,6 +1,7 @@
 package com.chernyak.authservice.service.impl;
 
 import com.chernyak.authservice.client.UserServiceFeignClient;
+import com.chernyak.authservice.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,14 +10,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private UserServiceFeignClient userServiceFeignClient;
+    private UserRepository userRepository;
 
-    public CustomUserDetailsService(UserServiceFeignClient userServiceFeignClient) {
-        this.userServiceFeignClient = userServiceFeignClient;
+    public CustomUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userServiceFeignClient.getByLogin(username);
+        return userRepository.findByUsername(username).get();
     }
 }

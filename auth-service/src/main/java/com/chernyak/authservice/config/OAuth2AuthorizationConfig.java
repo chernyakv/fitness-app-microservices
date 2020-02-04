@@ -59,5 +59,7 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
                 .passwordEncoder(encoder)
                 .allowFormAuthenticationForClients();
     }
-
 }
+
+
+

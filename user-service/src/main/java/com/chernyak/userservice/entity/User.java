@@ -22,7 +22,7 @@ public class User {
     private String id;
 
     @Indexed(unique = true)
-    private String login;
+    private String username;
 
     private String password;
 
@@ -43,8 +43,8 @@ public class User {
     @DBRef
     private Role role;
 
-    public User(String login, String password) {
-        this.login = login;
+    public User(String username, String password) {
+        this.username = username;
         this.password = password;
     }
 }
